@@ -1,12 +1,19 @@
 import { Outlet } from "react-router";
+import Header from "./components/Header";
+import NewsletterSubscription from "./components/NewsletterSubscription";
+import FaqSection from "./components/FaqSection";
+import Footer from "./components/Footer";
+import Credits from "./components/Credits";
 
 function App() {
   return (
     <>
-      <div className="py-8 bg-slate-100">
-        <h1 className="text-3xl font-bold">BLOGPOD</h1>
-        <Outlet />
-      </div>
+      <Header />
+      <Outlet />
+      <NewsletterSubscription />
+      <FaqSection />
+      <Footer />
+      <Credits />
     </>
   );
 }
