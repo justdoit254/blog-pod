@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --dark: #0d0d0b;
+    --white-text-color: #ffffffe0;
+    --white: #fff;
+    --lime: #caf31e;
+    --dark--card-hover: #2a2a29;
+    --dark--card-bg: #1a1a19;
+    --dark--grey: #383836;
+  }
+  html {
+    font-family: "Montserrat", sans-serif;
+  }
+  body {
+    background-color: var(--dark);
+    color: var(--white-text-color);
+    letter-spacing: 0.015em;
+    line-height: 1.5;
+    font-size: 20px;
+  }
+}
