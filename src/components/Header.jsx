@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import NavItem from "./NavItem";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <div className="sticky top-0 z-50 bg-(--dark) flex justify-between items-center max-w-lvw px-15 py-6 border-b border-[#ffffff25]">
       <Link to="/">
@@ -20,7 +22,7 @@ const Header = () => {
           {isLoggedIn ? (
             <NavItem to="/profile" children={"Profile"} />
           ) : (
-            <NavItem to="/auth/login" children={"Login"} />
+            <NavItem to="/auth/signup" children={"Signup"} />
           )}
         </div>
       </nav>

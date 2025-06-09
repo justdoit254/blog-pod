@@ -21,6 +21,10 @@ const useFormValidation = (validationRules) => {
             return rule.minLengthMessage || `${name} must be at least ${rule.minLength} characters`;
         }
 
+        if (rule.maxLength && value.length > rule.maxLength) {
+            return rule.maxLengthMessage || `${name} can be upto ${rule.maxLength} characters`;
+        }
+
         return '';
     }
 
