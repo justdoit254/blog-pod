@@ -7,7 +7,7 @@ const FormInput = ({
   placeholder,
   icon: Icon,
   error = "",
-  //   onFocus,
+  onFocus,
   className,
   ...props
 }) => {
@@ -24,7 +24,7 @@ const FormInput = ({
           name={name}
           type={inputType}
           placeholder={placeholder}
-          //   onFocus={onFocus}
+          onFocus={onFocus}
           className={`min-w-lg  bg-(--dark--card-hover) border-1 border-[#ffffff25] text-(--white) px-8 py-4 rounded-lg transition-all duration-200 
             ${Icon ? "pl-10" : ""} 
             ${isPassword ? "pr-10" : ""} 
@@ -41,14 +41,15 @@ const FormInput = ({
           <button
             type="button"
             onClick={() => setShowPassword((prevState) => !prevState)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
           >
             {showPassword ? <EyeOff /> : <Eye />}
           </button>
         )}
       </div>
       {error && (
-        <div>
-          <AlertCircle />
+        <div className="flex flex-row items-center gap-1 text-sm text-red-500">
+          <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}

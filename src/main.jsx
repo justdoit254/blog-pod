@@ -7,13 +7,14 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import Home from "./pages/Home.jsx";
 import AllBlogs from "./pages/AllBlogs.jsx";
 import AddBlog from "./pages/AddBlog.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
 import Profile from "./pages/Profile.jsx";
 import Logout from "./pages/Logout.jsx";
 import SingleBlog from "./pages/SingleBlog.jsx";
 import Contact from "./pages/Contact.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import SignupLogin from "./pages/SignupLogin.jsx";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import { ToastProvider } from "./context/ToastContext.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,8 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "all-blogs", Component: AllBlogs },
       { path: "add-blog", Component: AddBlog },
-      { path: "auth/login", Component: Login },
-      { path: "auth/signup", Component: Signup },
+      { path: "auth/login", element: <SignupLogin mode="login" /> },
+      { path: "auth/signup", element: <SignupLogin mode="signup" /> },
       { path: "profile", Component: Profile },
       { path: "logout", Component: Logout },
       { path: "blog/:slug", Component: SingleBlog },
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <AuthContextProvider>
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
+  </AuthContextProvider>
 );
