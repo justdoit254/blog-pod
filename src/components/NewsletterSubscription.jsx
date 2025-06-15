@@ -57,6 +57,7 @@ const NewsletterSubscription = () => {
           ref={emailRef}
           //   error={errors.email}
           //   onFocus={() => clearFocus("email")}
+          className={"py-4"}
         />
         <div onClick={handleFormSubmit}>
           {/* <Button isPending={isPending}>Submit</Button> */}

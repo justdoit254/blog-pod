@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import Button from "../components/Button";
 import authService from "../services/auth";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const { userData, setLoading, setUserData, setIsLoggedIn } =
     useContext(AuthContext);
 
@@ -13,7 +15,7 @@ const Profile = () => {
       authService.logout();
       setUserData(null);
       setIsLoggedIn(false);
-      Navigate("/");
+      navigate("/");
     } catch (error) {
       console.log("Error: ", error);
     } finally {

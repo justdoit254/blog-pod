@@ -25,6 +25,18 @@ const useFormValidation = (validationRules) => {
             return rule.maxLengthMessage || `${name} can be upto ${rule.maxLength} characters`;
         }
 
+        if (rule.isArray) {
+            const arrayValue = value
+                .split(",")
+                .map(tag => tag.trim())
+                .filter(tag => tag);
+
+            if (rule.minLength && arrayValue.length < rule.minLength) {
+                return rule.minLengthMessage || `${name} must be have at least ${rule.minLength} items`;
+            }
+
+        }
+
         return '';
     }
 

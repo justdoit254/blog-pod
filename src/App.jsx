@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Header from "./components/Header";
 import NewsletterSubscription from "./components/NewsletterSubscription";
 import FaqSection from "./components/FaqSection";
@@ -9,12 +9,16 @@ import { AuthContext } from "./context/AuthContext.jsx";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
+  const location = useLocation();
+  const isAddBlogPage = location?.pathname === "/add-blog";
+
   return (
     <>
       <Header />
       <Outlet />
-      {isLoggedIn && <NewsletterSubscription />}
+      {isLoggedIn && !isAddBlogPage && <NewsletterSubscription />}
       <FaqSection />
+      {isAddBlogPage && <NewsletterSubscription />}
       <Footer />
       <Credits />
     </>
