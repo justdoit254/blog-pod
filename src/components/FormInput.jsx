@@ -9,6 +9,9 @@ const FormInput = ({
   error = "",
   onFocus,
   className,
+  value,
+  onChange,
+  label,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +19,14 @@ const FormInput = ({
   const inputType = isPassword && showPassword ? "text" : type;
   return (
     <div className="space-y-1">
+      {label && (
+        <label
+          htmlFor={name}
+          className="block mb-1 text-lg font-medium text-(--lime)"
+        >
+          {label}
+        </label>
+      )}
       <div className="relative">
         {Icon && (
           <Icon className="absolute left-2 top-8 transform -translate-y-1/2 h-6 w-6 text-(--dark--grey)" />
@@ -24,8 +35,10 @@ const FormInput = ({
           name={name}
           type={inputType}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
           onFocus={onFocus}
-          className={`min-w-lg  bg-(--dark--card-hover) border-1 border-[#ffffff25] text-(--white) px-8 py-4 rounded-lg transition-all duration-200 
+          className={`min-w-lg bg-(--dark--card-hover) border-1 border-[#ffffff25] text-(--white) px-8 py-3 rounded-lg transition-all duration-200 
             ${Icon ? "pl-10" : ""} 
             ${isPassword ? "pr-10" : ""} 
             ${

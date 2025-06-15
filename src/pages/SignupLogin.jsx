@@ -167,6 +167,7 @@ const SignupLogin = ({ mode }) => {
               ref={nameRef}
               error={errors.name}
               onFocus={() => clearError("name")}
+              className={"py-4"}
             />
           )}
           <FormInput
@@ -177,6 +178,7 @@ const SignupLogin = ({ mode }) => {
             ref={emailRef}
             error={errors.email}
             onFocus={() => clearError("email")}
+            className={"py-4"}
           />
           <FormInput
             name="password"
@@ -186,6 +188,7 @@ const SignupLogin = ({ mode }) => {
             ref={passwordRef}
             error={errors.password}
             onFocus={() => clearError("password")}
+            className={"py-4"}
           />
           <Button
             className="border-(--dark--card-hover) text-2xl text-(--white-text-color)"
