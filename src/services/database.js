@@ -10,7 +10,8 @@ const transformToSlug = (input) => {
         .replace(/\s+/g, '-')                        // Replace all whitespace with dash
         .replace(/[^a-z0-9_-]/g, '')                 // Remove all except a-z, 0-9, _ and -
         .replace(/-+/g, '-')                         // Collapse multiple dashes into one
-        .replace(/^[-]+|[-]+$/g, '');                // Remove leading/trailing dashes
+        .replace(/^[-]+|[-]+$/g, '')                // Remove leading/trailing dashes
+        .slice(0, 36);                               // Limit slug to 36 characters
 }
 
 const calculateReadingTime = ({ title = '', briefIntro = '', content = '' }) => {
@@ -38,8 +39,6 @@ export class DatabaseService {
     async createPost(postData) {
         //postData => {title*, briefIntro, tags*, image, content*, userId*}
         //calculate readTime
-        console.log('pfwp', postData);
-
         const readTime = calculateReadingTime(postData)
         const payloadData = { ...postData, readTime, active: true }     //active is true by-default user can change this in profile in future
         //For id calculate slug
@@ -84,7 +83,7 @@ export class DatabaseService {
 
     async getPosts(queries = [Query.equal("active", true)]) {
         try {
-            return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId, queries)
+            return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteCollectionId, queries)
         } catch (error) {
             console.log("Appwrite serive :: getPosts :: error", error);
             throw error;
