@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router";
+import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import Header from "./components/Header";
 import NewsletterSubscription from "./components/NewsletterSubscription";
 import FaqSection from "./components/FaqSection";
@@ -14,6 +14,7 @@ function App() {
 
   return (
     <>
+      <ScrollRestoration />
       <Header />
       <Outlet />
       {isLoggedIn && !isAddBlogPage && <NewsletterSubscription />}

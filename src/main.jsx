@@ -15,6 +15,8 @@ import NotFound from "./pages/NotFound.jsx";
 import SignupLogin from "./pages/SignupLogin.jsx";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
+import fetchBlog from "./helpers/blogLoader.js";
+import BlogNotFound from "./components/BlogNotFound.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,12 @@ const router = createBrowserRouter([
       { path: "auth/signup", element: <SignupLogin mode="signup" /> },
       { path: "profile", Component: Profile },
       { path: "logout", Component: Logout },
-      { path: "blog/:slug", Component: SingleBlog },
+      {
+        path: "blog/:id",
+        Component: SingleBlog,
+        loader: fetchBlog,
+        errorElement: <BlogNotFound />,
+      },
       { path: "contact", Component: Contact },
       { path: "*", Component: NotFound },
     ],

@@ -23,7 +23,7 @@ const calculateReadingTime = ({ title = '', briefIntro = '', content = '' }) => 
     const wordsPerMinute = 100;       //200 is actual but for slow readers
     const time = Math.ceil(totalWords / wordsPerMinute); // rounded up
 
-    return `${time} minutes`; // in minutes
+    return `${time} minute read`; // in minutes
 };
 
 
