@@ -76,7 +76,7 @@ export class DatabaseService {
         try {
             return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId, slug)
         } catch (error) {
-            console.log("Appwrite serive :: getPost :: error", error);
+            console.log("Appwrite service :: getPost :: error", error);
             throw error;
         }
     }
@@ -85,7 +85,7 @@ export class DatabaseService {
         try {
             return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteCollectionId, queries)
         } catch (error) {
-            console.log("Appwrite serive :: getPosts :: error", error);
+            console.log("Appwrite service :: getPosts :: error", error);
             throw error;
         }
     }

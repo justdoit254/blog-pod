@@ -31,7 +31,7 @@ const AllBlogs = () => {
         <HorizontalPreviewCard blog={blogs[0]} />
       </div>
       <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-14 my-2 auto-rows-fr">
-        {blogs.map((blog) => (
+        {blogs.slice(1)?.map((blog) => (
           <VerticalPreviewCard key={blog?.$id} blog={blog} />
         ))}
       </div>
