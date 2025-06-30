@@ -102,6 +102,18 @@ export class DatabaseService {
             throw error;
         }
     }
+
+    //Newsletter subscription API
+    async newsletterSubscribe(payloadData) {
+        //payloadData => {email*, userId}
+        try {
+            return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteSubscribeCollectionId, ID.unique(), payloadData)
+        } catch (error) {
+            console.log("Appwrite service :: newsletterSubscribe :: error", error);
+            throw error;
+        }
+    }
+
 }
 
 const dbService = new DatabaseService()

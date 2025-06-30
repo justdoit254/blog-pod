@@ -1,22 +1,27 @@
-import { useRef, useState, useTransition } from "react";
+import { useContext, useRef, useState } from "react";
 import FormInput from "./FormInput";
 import Button from "./Button";
 import { Mail } from "lucide-react";
 import useFormValidation from "../customHooks/useFormValidation";
+import dbService from "../services/database";
+import { AuthContext } from "../context/AuthContext";
+import { useToast } from "../context/ToastContext";
+
+const validationRules = {
+  email: {
+    required: true,
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    requiredMessage: "Email is required",
+    patternMessage: "Please enter a valid email address",
+  },
+};
 
 const NewsletterSubscription = () => {
-  // const [isPending, startTransition] = useTransition()
-  const [success, setSuccess] = useState("");
+  const { userData: user } = useContext(AuthContext);
+
   const emailRef = useRef(null);
 
-  const validationRules = {
-    email: {
-      required: true,
-      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      requiredMessage: "Email is required",
-      patternMessage: "Please enter a valid email address",
-    },
-  };
+  const { showToast } = useToast();
 
   const { errors, validateForm, clearError } =
     useFormValidation(validationRules);
@@ -24,12 +29,12 @@ const NewsletterSubscription = () => {
   const handleSubmit = async (formData) => {
     if (!validateForm(formData)) return;
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await dbService.newsletterSubscribe({
+      email: formData.get("email"),
+      userId: user?.$id,
+    });
 
-    const email = formData.get("email");
-    console.log("Newsletter signup:", { email });
-    setSuccess(`Thanks! We've subscribed ${email} to our newsletter.`);
+    showToast(`Thanks! you've subscribed to our newsletter.`);
   };
 
   const handleFormSubmit = () => {
@@ -39,7 +44,6 @@ const NewsletterSubscription = () => {
       formData.append(input.name, input.value);
     });
     handleSubmit(formData);
-    // startTransition(() => handleSubmit(formData));
   };
   return (
     <div className="max-w-6xl mx-auto p-32 bg-(--dark--card-bg) rounded-3xl shadow-lg flex flex-col items-center">
@@ -55,12 +59,11 @@ const NewsletterSubscription = () => {
           placeholder="Enter your email"
           icon={Mail}
           ref={emailRef}
-          //   error={errors.email}
-          //   onFocus={() => clearFocus("email")}
+          error={errors.email}
+          onFocus={() => clearFocus("email")}
           className={"py-4"}
         />
         <div onClick={handleFormSubmit}>
-          {/* <Button isPending={isPending}>Submit</Button> */}
           <Button>Submit</Button>
         </div>
       </div>
