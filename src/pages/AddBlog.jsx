@@ -247,6 +247,7 @@ const AddBlog = () => {
               }));
             }
           }}
+          className={"min-h-96"}
         />
         {blogFormErrors?.content && (
           <ErrorMessage error={blogFormErrors?.content} />
