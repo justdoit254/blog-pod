@@ -1,4 +1,4 @@
-import { Client, Databases, Query } from "appwrite";
+import { Client, Databases, ID, Query } from "appwrite";
 import config from "../config";
 
 const transformToSlug = (input) => {
@@ -86,6 +86,19 @@ export class DatabaseService {
             return await this.databases.listDocuments(config.appwriteDatabaseId, config.appwriteCollectionId, queries)
         } catch (error) {
             console.log("Appwrite service :: getPosts :: error", error);
+            throw error;
+        }
+    }
+
+
+    //Contact Page APIs
+
+    async createQuery(payloadData) {
+        //payloadData => {name*, email*, phone, subject*, message*, userId}
+        try {
+            return await this.databases.createDocument(config.appwriteDatabaseId, config.appwriteContactCollectionId, ID.unique(), payloadData)
+        } catch (error) {
+            console.log("Appwrite service :: createQuery :: error", error);
             throw error;
         }
     }
